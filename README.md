@@ -1,6 +1,8 @@
 README -- Show_RP_DB  --
 Copyright 2023 by J G Morse Richmond BC Canada
+
 [Intro]
+
 Richard Pavlicek has provided to the bridge community a
 database of over 10 million solved deals.
 By "solved" we mean that attached to each 52 card
@@ -12,6 +14,7 @@ See the file rsd.txt in this repository for RP's
 explanation.
 
 [Source]
+
 This database, in embryonic form, can be downladed 
 from RP's webisite at:www.rpbridge.net/rput.htm
 You can also download RP's code to expand and create
@@ -26,6 +29,7 @@ The resulting database of over 10 million deals is thus
 only 230 MiB. 
 
 [This Repository]
+
 RP's code comes as pre-compiled (no source) utilities
 that run on the MS-DOS command line. 
 As such they are not useful to Linux, or other non
@@ -41,6 +45,7 @@ This expands each deal from 23 non-human readable bytes,
 to 136 human readable characters. 
 
 [Example]
+
 This is a dump in hex format of the first 23 bytes in RP's DB.
 7252 7a0a e17a e4f9 52e0 41fc 7c49 4949 492b 2a39 3967 67 
 
@@ -48,6 +53,7 @@ And this is what the "show_rpdd" utility expands it to:
 n J873.J42.Q65.KT2 e AT652.A976.AJ82. s Q4.85.KT9.A87643 w K9.KQT3.743.QJ95;06,03,02,04,04,07,09,10,09,09,06,03,02,04,04,07,09,11,09,09
 
 [Uses]
+
 The primary benefit of RP's database is that the deals are random and they are solved. 
 This allows students of Bridge a way to study questions such as how much difference does a 9 card fit 
 make over an 8 card fit and so on. RP's website has several examples of how RP himself has used 
@@ -65,6 +71,7 @@ a 52 byte string to which is appended 40 bytes of tricks results.
 The expanded format allows for a more straight forward analysis of the various hands. 
 
 [Running the Program]
+
 Place the "show_rpdd" binary in a directory in your PATH environment variable (e.g /home/your_user/bin)
 Or cd to the directory where the binary is located.
 From the command line type: ./show_rpdd -h to get a usage message giving the various command line options.
