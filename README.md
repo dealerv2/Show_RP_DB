@@ -64,14 +64,14 @@ The expanded format allows for a more straight forward analysis of the various h
 <p>Install the <b>show_rpdd</b> binary in a directory in your PATH environment variable (e.g /home/youruser/bin).
 Or cd to the directory where the binary is located.
 From the command line type: <b>./show_rpdd -h</b> to get a usage message giving the various command line options.
-The RP DB file is specified via the **-i** option. 
+The RP DB file is specified via the <b>-i</b> option. 
 The pbn formatted output is sent to stdout which you may redirect to a file.</p><p>
-The number of deals you want to output is set by the **-g** option.
-The starting position in the DB file is set with the **-s** option. The option specifies which thousands block to start at, so that you are not getting the same deals all the time as you would if you just read sequentially. E.G. -s5 would start the program at record number 5001.</p>
+The number of deals you want to output is set by the <b>-g</b> option.
+The starting position in the DB file is set with the <b>-s</b> option. The option specifies which thousands block to start at, so that you are not getting the same deals all the time as you would if you just read sequentially. E.G. -s5 would start the program at record number 5001.</p>
 <p>
-The output of the **-h** option follows:</p>
-<p>**./show_rpdd -h**</p>
-<p>Usage: ./show_rpdd -[g:i:o:s:v:D:hVX:] [>ofile.pbn] </p>
+The output of the <b>-h</b> option follows:</p>
+<p><b>./show_rpdd -h</b></p>
+<p>Usage: ./show_rpdd -[g: i: o: s: v: D: hVX: ] [>ofile.pbn] </p>
 <p>g={Number of records to get from RP Database -- Default 100}</p> 
 <p>i={Name of RP DB file. '=' uses the name rpdd.zrd in the default directory}</p>
 <p>o={path name of Dealer binary file; if not given no binary file generated}</p>
