@@ -1,11 +1,12 @@
-/* File tst_rpdd.c -- RP DataBase Browser for rpdd.zrd files *
+/* File show_rpdd.c -- RP DataBase Browser for rpdd.zrd files *
  * Date        Version     Author      Comment
  * 2023/03/07  1.0.0       JGM         First Working version.
+ * 2023/04/17  1.1.0       JGM         Better Error Msg if DB open fails
  */
 #define GNU_SOURCE
 #define JGMDBG 1              /* so the dbgprt_macros.h works ok */
-#define VERSION "1.0.0"
-#define BUILD_DATE "2023/03/08"
+#define VERSION "1.1.0"
+#define BUILD_DATE "2023/04/18"
 #define AUTHORS "JGM"
 
 #include <assert.h>           /* assert.h */
@@ -83,11 +84,11 @@ struct rpdd_st rp_rec;
 BYTE_k *pbyte = &rp_rec.card[0] ;
 DEAL_k curdeal ;
 char pbn_rec[136] ; /* 75 for the cards, 60 for dd, x 20, and one for the null terminator. */
-char rpdd_dir[]="/home/greg19/Programming/Bridge_SW/RP_Browser" ;
-char rpdd_path[]="/home/greg19/Programming/Bridge_SW/RP_Browser/rpdd.zrd";
+char rpdd_dir[]="/home/greg19/Programming/Bridge_SW/RP_DB" ;
+char rpdd_path[]="/home/greg19/Programming/Bridge_SW/RP_DB/rpdd.zrd";
 
 struct options_st opts = {
-   .options_error=0, .seed=0, .opt_g=5, .opt_i="rpdd.zrd", .opt_o="", .opt_D=0, .opt_h=0, .opt_v=1, .opt_V=0, .opt_X=0,
+   .options_error=0, .seed=0, .opt_g=100, .opt_i="./rpdd.zrd", .opt_o="", .opt_D=0, .opt_h=0, .opt_v=1, .opt_V=0, .opt_X=0,
 };
 
 // n J873.J42.Q65.KT2 e AT652.A976.AJ82. s Q4.85.KT9.A87643 w K9.KQT3.743.QJ95
@@ -462,6 +463,7 @@ int get_options (int argc, char *argv[], struct options_st *opts) {
         printf ("Revision: %s \n", VERSION );
         printf ("Build Date:[%s] \n", BUILD_DATE );
         printf ("$Authors: JGM $\n");
+        printf ("Default Database: %s\n",rpdd_path ) ;
         #ifdef JGMDBG
           printf("JGMDBG is defined. Debugging printing to stderr is active\n");
         #endif
@@ -491,22 +493,25 @@ void initprogram(struct options_st *opts) {
    long rpdd_pos = 0 ;
    jgmDebug = opts->opt_D ;
    if(strcmp(opts->opt_i, "=") == 0 ) {  /* strings match */
+      strncpy(opts->opt_i, rpdd_path, sizeof(opts->opt_i) - 1 ) ;
+      JGMDPRT(3,"Using Default DB path %s\n",rpdd_path ) ;
       opts->rp_file = fopen(rpdd_path,"r") ;
    }
    else {
+      JGMDPRT(3,"Using Requested DB path %s\n",opts->opt_i) ;
       opts->rp_file = fopen(opts->opt_i, "r") ;
    }
    if (opts->rp_file == NULL ) {
-      perror("Cant open RP database for read!. \n");
-      fprintf(stderr, "%s open Failed Aborting run. \n", opts->opt_i);
+      perror("Cant open RP database for read!");
+      fprintf(stderr, "\n Read Open Failed for path=[%s] Aborting run. \n", opts->opt_i);
       exit (-1) ;
    }
-   JGMDPRT(2,"RP DD File '%s' Opened OK \n",opts->opt_i );
+   JGMDPRT(2,"RP DD File [%s] Opened OK \n",opts->opt_i );
    if (strlen(opts->opt_o ) > 0 ) {
       opts->dl52_file = fopen(opts->opt_o, "w") ;
       if (opts->dl52_file == NULL ) {
-         perror("Cant open Dealer Binary File for write. \n");
-         fprintf(stderr, "%s open Failed Aborting run. \n",opts->opt_o);
+         perror("Cant open Dealer Binary File for write");
+         fprintf(stderr, "\n Write Open Failed for path [%s] Aborting run. \n",opts->opt_o);
          exit (-1) ;
       }
    }
@@ -529,7 +534,7 @@ void initprogram(struct options_st *opts) {
 "D={Debug Verbosity level} \n" \
 "h={show this msg}\n"\
 "V={show Version info} \n" \
-"X={Show the binary records in PBN format. 0=No show; +ve n Number to show. -ve n show all} \n"
+"X={Show the first N records of the Dealer binary file at end of run. Default=0 0=No show; +ve N Number to show. -ve N show all}\n"
 
 int usage(char *pgm) {
    fprintf(stderr, USAGE_MSG ,pgm) ;

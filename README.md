@@ -13,7 +13,7 @@ explanation.
 <p> </p>
 <p>[Source] </p>
 <p>This database, in embryonic form, can be downladed 
-from <a href="www.rpbridge.net/rput.htm">RP Website</a>
+from the <a href="www.rpbridge.net/rput.htm">RP Website</a>
 You can also download RP's code to expand and create
 the DB, and to selectively get various records from it.
 Consult RP's website for more detail.</p>
