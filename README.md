@@ -86,10 +86,10 @@ The output of the <b>-h</b> option follows:</p>
 <p>X={Show the first N records of the Dealer binary file at end of run. Default=0 0=No show; +ve N Number to show. -ve N show all}</p>
 
 <p>[The Database]<p>
-Because Github does not allow files more than 100 MB, the database on this site comes as 3 separate files:
-<q> rpdd_0-4Million.zrd rpdd_4-8Million.zrd  rpdd_8-10Million.zrd </q>.
-The numbers in the file names show the range of deal numbers contained in the files.
-If you append these files together when you get them you will have RP's complete database.</br />
+Because Github does not allow files more than 50 MB, the database on this site comes as 6 separate files each with 2 Million deals.
+rpdd00  rpdd01  rpdd02  rpdd03  rpdd04  rpdd05
+
+If you append these files together in sequence when you get them you will have RP's complete database.</br />
 Also included are the files <q>rpdd_10First.zrd and rpdd_10Last.zrd</q> which are the first 10 and the last 10 deals.
 These two files can be used to test and debug with.</p>
 
