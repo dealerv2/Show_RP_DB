@@ -4,7 +4,7 @@
  * 2023/04/17  1.1.0       JGM         Better Error Msg if DB open fails
  */
 #define GNU_SOURCE
-#define JGMDBG 1              /* so the dbgprt_macros.h works ok */
+#undef JGMDBG              /* so the dbgprt_macros.h works ok */
 #define VERSION "1.1.0"
 #define BUILD_DATE "2023/04/18"
 #define AUTHORS "JGM"
@@ -84,8 +84,8 @@ struct rpdd_st rp_rec;
 BYTE_k *pbyte = &rp_rec.card[0] ;
 DEAL_k curdeal ;
 char pbn_rec[136] ; /* 75 for the cards, 60 for dd, x 20, and one for the null terminator. */
-char rpdd_dir[]="/home/greg19/Programming/Bridge_SW/RP_DB" ;
-char rpdd_path[]="/home/greg19/Programming/Bridge_SW/RP_DB/rpdd.zrd";
+char rpdd_dir[]="RP_DB" ;
+char rpdd_path[]="RP_DB/rpdd.zrd";
 
 struct options_st opts = {
    .options_error=0, .seed=0, .opt_g=100, .opt_i="./rpdd.zrd", .opt_o="", .opt_D=0, .opt_h=0, .opt_v=1, .opt_V=0, .opt_X=0,
@@ -227,7 +227,7 @@ int main (int argc, char *argv[]) {
 
          /* --- Subroutines  ---*/
 int get_dl52_rec(DEAL_k deal, short int ddres[][5], FILE *dl52_file) {
-   // Using Globals to return results
+   // Called with pointers to results areas: char deal[52], and short int ddres[4][5]
 
    fread(deal, 1 , 52 , dl52_file) ;
    if (feof(dl52_file) ) {return -1 ; }

@@ -1,8 +1,6 @@
 /* File dbgprt_macros.h */
 #ifndef DBGPRT_MACROS_H
 #define DBGPRT_MACROS_H
-/* this next line should come from the environment. */
-#define JGMDBG 1   // for testing
 #ifdef JGMDBG
   #define DBGPRINT(...) fprintf(stderr, __VA_ARGS__)
   #define DBGLOC(fmt,...) fprintf(stderr, "%s:%d " fmt, __FILE__,__LINE__,## __VA_ARGS__)
